@@ -16,9 +16,7 @@ import {
 } from './controllers/FavoritesContraller.js';
 
 mongoose
-  .connect(
-    'mongodb+srv://admin:wwwwww@cluster0.ljuinnt.mongodb.net/songs?retryWrites=true&w=majority&appName=Cluster0'
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DB ok'))
   .catch((err) => console.log('error: ', err));
 
@@ -44,6 +42,6 @@ app.get('/favorites', checkAuth, getFavorites);
 
 app.post('/favorites', checkAuth, changeFavorites);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 4444, () => {
   console.log('Server started');
 });
